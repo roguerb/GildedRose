@@ -60,5 +60,9 @@ module GildedRose
         end
       end
     end
+
+    def find(name)
+      @items.detect { |item| item.name.downcase.include?(name) }
+    end
   end
 end

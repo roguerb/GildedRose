@@ -6,4 +6,10 @@ describe GildedRose::Rose do
     subject.update_quality
   end
 
+  describe "#find" do
+    it "finds the item with matching name" do
+      item = rose.find('brie')
+      expect(item.name).to eq('Aged Brie')
+    end
+  end
 end
