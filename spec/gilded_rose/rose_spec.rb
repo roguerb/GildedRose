@@ -21,7 +21,7 @@ describe GildedRose::Rose do
         expect{ rose.update_quality }.to change{ rose.find('brie').quality }.from(0).to(1)
       end
 
-      it "never is never assigned a quality above 50" do
+      it "is never assigned a quality above 50" do
         51.times { rose.update_quality }
         expect(rose.find('brie').quality).to eq(50)
       end
