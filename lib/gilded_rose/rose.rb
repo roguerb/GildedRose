@@ -11,7 +11,7 @@ module GildedRose
       offset = @item.sell_in < 0 ? 2 : 1
 
       if quality_in_range
-        @item.quality = item.quality - offset
+        update_item_quality(-offset)
       end
     end
 
@@ -26,12 +26,16 @@ module GildedRose
     def update_sell_in
       @item.sell_in -= 1
     end
+
+    def update_item_quality(offset_amount)
+      @item.quality += offset_amount
+    end
   end
 
   class Brie < Product
     def update_quality
       if quality_in_range
-        @item.quality = @item.quality + 1
+        update_item_quality(+1)
       end
     end
 
@@ -45,7 +49,7 @@ module GildedRose
       offset = @item.sell_in < 0 ? 4 : 2
 
       if quality_in_range
-        @item.quality = item.quality - offset
+        update_item_quality(-offset)
       end
     end
   end
@@ -63,13 +67,13 @@ module GildedRose
   class Passes < Product
     def update_quality
       if @item.sell_in <= 10 && @item.sell_in > 5
-        @item.quality = @item.quality + 2
+        update_item_quality(+2)
       elsif @item.sell_in < 5 && @item.sell_in > 0
-        @item.quality = @item.quality + 3
+        update_item_quality(+3)
       elsif @item.sell_in <= 0
         @item.quality = 0
       else
-        @item.quality = @item.quality + 1
+        update_item_quality(+1)
       end
     end
   end
