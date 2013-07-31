@@ -8,10 +8,8 @@ module GildedRose
     attr_accessor :item
 
     def update_quality
-      offset = @item.sell_in < 0 ? 2 : 1
-
       if quality_in_range
-        update_item_quality(-offset)
+        update_item_quality(-calculate_quality_offset)
       end
     end
 
@@ -30,6 +28,10 @@ module GildedRose
     def update_item_quality(offset_amount)
       @item.quality += offset_amount
     end
+
+    def calculate_quality_offset
+      @item.sell_in < 0 ? 2 : 1
+    end
   end
 
   class Brie < Product
@@ -46,11 +48,13 @@ module GildedRose
 
   class Conjured < Product
     def update_quality
-      offset = @item.sell_in < 0 ? 4 : 2
-
       if quality_in_range
-        update_item_quality(-offset)
+        update_item_quality(-calculate_quality_offset)
       end
+    end
+
+    def calculate_quality_offset
+      @item.sell_in < 0 ? 4 : 2
     end
   end
 
@@ -66,14 +70,19 @@ module GildedRose
 
   class Passes < Product
     def update_quality
-      if @item.sell_in <= 10 && @item.sell_in > 5
-        update_item_quality(+2)
-      elsif @item.sell_in < 5 && @item.sell_in > 0
-        update_item_quality(+3)
-      elsif @item.sell_in <= 0
-        @item.quality = 0
+      # TODO: in range check? make a test
+      update_item_quality(calculate_quality_offset)
+    end
+
+    def calculate_quality_offset
+      if item.sell_in <= 10 && item.sell_in > 5
+        2
+      elsif item.sell_in < 5 && item.sell_in > 0
+        3
+      elsif item.sell_in <= 0
+        -item.quality # 0 final result
       else
-        update_item_quality(+1)
+        1
       end
     end
   end
