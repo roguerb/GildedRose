@@ -28,8 +28,13 @@ describe GildedRose::Rose do
     end
 
     context "when item is 'Conjured Mana Cake'" do
-      xit "decreases Quality twice as fast" do
+      it "decreases Quality twice as fast" do
         expect{ rose.update_quality }.to change{ rose.find('mana').quality }.from(6).to(4)
+      end
+
+      it "decreases Quality twice as fast when past sell date" do
+        rose.find('mana').sell_in = 0
+        expect{ rose.update_quality }.to change{ rose.find('mana').quality }.from(6).to(2)
       end
     end
 

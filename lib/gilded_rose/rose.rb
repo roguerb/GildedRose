@@ -41,6 +41,13 @@ module GildedRose
   end
 
   class Conjured < Product
+    def update_quality(new_sell_in)
+      offset = new_sell_in < 0 ? 4 : 2
+
+      if quality_in_range
+        @item.quality = item.quality - offset
+      end
+    end
   end
 
   class Sulfuras < Product
@@ -97,7 +104,6 @@ module GildedRose
         product = ProductMapper.build_from(item)
         product.update_quality(item.sell_in - 1)
         product.update_sell_in
-        item = product.item
       end
     end
 
