@@ -9,6 +9,11 @@ describe GildedRose::Rose do
         10.times { rose.update_quality }
         expect(rose.find('elixir').quality).to eq(0)
       end
+
+      it "degrades twice as fast after sell date is 0" do
+        6.times { rose.update_quality }
+        expect(rose.find('elixir').quality).to eq(0)
+      end
     end
 
     context "when item is 'Aged Brie'" do
