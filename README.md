@@ -1,6 +1,11 @@
-If you want to get cracking on the ruby source then do this:
+The Gilded Rose
+==========
 
-    git clone git@github.com:professor/GildedRose.git
+### A Refactoring Code Kata
+
+[![Code Climate](https://codeclimate.com/github/roguerb/GildedRose.png)](https://codeclimate.com/github/roguerb/GildedRose)
+
+_Fork the original challenge at http://github.com/professor/GildedRose_
 
 Hi and welcome to team Gilded Rose.
 
