@@ -7,8 +7,8 @@ module GildedRose
 
     attr_accessor :item
 
-    def update_quality(new_sell_in)
-      offset = new_sell_in < 0 ? 2 : 1
+    def update_quality
+      offset = @item.sell_in < 0 ? 2 : 1
 
       if quality_in_range
         @item.quality = item.quality - offset
@@ -29,7 +29,7 @@ module GildedRose
   end
 
   class Brie < Product
-    def update_quality(new_sell_in)
+    def update_quality
       if quality_in_range
         @item.quality = @item.quality + 1
       end
@@ -41,8 +41,8 @@ module GildedRose
   end
 
   class Conjured < Product
-    def update_quality(new_sell_in)
-      offset = new_sell_in < 0 ? 4 : 2
+    def update_quality
+      offset = @item.sell_in < 0 ? 4 : 2
 
       if quality_in_range
         @item.quality = item.quality - offset
@@ -54,15 +54,19 @@ module GildedRose
     def update_sell_in
       # do nothing
     end
+
+    def update_quality
+      # do nothing
+    end
   end
 
   class Passes < Product
-    def update_quality(new_sell_in)
-      if new_sell_in <= 10 && new_sell_in > 5
+    def update_quality
+      if @item.sell_in <= 10 && @item.sell_in > 5
         @item.quality = @item.quality + 2
-      elsif new_sell_in < 5 && new_sell_in > 0
+      elsif @item.sell_in < 5 && @item.sell_in > 0
         @item.quality = @item.quality + 3
-      elsif new_sell_in <= 0
+      elsif @item.sell_in <= 0
         @item.quality = 0
       else
         @item.quality = @item.quality + 1
@@ -102,8 +106,8 @@ module GildedRose
     def update_quality
       @items.each do |item|
         product = ProductMapper.build_from(item)
-        product.update_quality(item.sell_in - 1)
         product.update_sell_in
+        product.update_quality
       end
     end
 
