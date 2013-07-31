@@ -9,8 +9,12 @@ module GildedRose
 
     def update_quality
       if quality_in_range
-        update_item_quality(-calculate_quality_offset)
+        update_item_quality(negative calculate_quality_offset)
       end
+    end
+
+    def negative(value)
+      -1 * value
     end
 
     def quality_in_range
@@ -49,7 +53,7 @@ module GildedRose
   class Conjured < Product
     def update_quality
       if quality_in_range
-        update_item_quality(-calculate_quality_offset)
+        update_item_quality(negative calculate_quality_offset)
       end
     end
 
@@ -75,12 +79,12 @@ module GildedRose
     end
 
     def calculate_quality_offset
-      if item.sell_in <= 10 && item.sell_in > 5
-        2
-      elsif item.sell_in < 5 && item.sell_in > 0
+      if (-1..0).include? item.sell_in
+        negative item.quality # result is 0
+      elsif (1..5).include? item.sell_in
         3
-      elsif item.sell_in <= 0
-        -item.quality # 0 final result
+      elsif (6..10).include? item.sell_in
+        2
       else
         1
       end
