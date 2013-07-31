@@ -14,7 +14,6 @@ module GildedRose
     end
 
     def update_quality
-
       for i in 0..(@items.size-1)
         if (@items[i].name != "Aged Brie" && @items[i].name != "Backstage passes to a TAFKAL80ETC concert")
           if (@items[i].quality > 0)
