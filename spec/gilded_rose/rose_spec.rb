@@ -31,6 +31,11 @@ describe GildedRose::Rose do
       xit "decreases Quality twice as fast" do
         expect{ rose.update_quality }.to change{ rose.find('mana').quality }.from(6).to(4)
       end
+
+      xit "decreases Quality four times as fast when past sell date" do
+        rose.find('mana').sell_in = 0
+        expect{ rose.update_quality }.to change{ rose.find('mana').quality }.from(6).to(2)
+      end
     end
 
     context "when item is 'Backstage passes'" do
@@ -57,6 +62,13 @@ describe GildedRose::Rose do
       context "when sell in value is 0" do
         it "sets quality to 0" do
           rose.find('passes').sell_in = 0
+          expect{ rose.update_quality }.to change{ rose.find('passes').quality }.from(20).to(0)
+        end
+      end
+
+      context "when sell in is below 0" do
+        it "the quality remains 0" do
+          rose.find('passes').sell_in = -10
           expect{ rose.update_quality }.to change{ rose.find('passes').quality }.from(20).to(0)
         end
       end
