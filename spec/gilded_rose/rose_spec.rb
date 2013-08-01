@@ -65,6 +65,13 @@ describe GildedRose::Rose do
           expect{ rose.update_quality }.to change{ rose.find('passes').quality }.from(20).to(0)
         end
       end
+
+      context "when sell in is below 0" do
+        it "the quality remains 0" do
+          rose.find('passes').sell_in = -10
+          expect{ rose.update_quality }.to change{ rose.find('passes').quality }.from(20).to(0)
+        end
+      end
     end
 
     context "when item is 'Sulfuras'" do
