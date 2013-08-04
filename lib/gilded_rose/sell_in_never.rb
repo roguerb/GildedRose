@@ -1,7 +1,7 @@
 module GildedRose
   module SellInNever
     def update_sell_in
-      # nothing to do
+      # nothing
     end
   end
 end

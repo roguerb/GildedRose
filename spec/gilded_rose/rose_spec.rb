@@ -21,18 +21,18 @@ describe GildedRose::Rose do
         expect{ rose.update_quality }.to change{ rose.find('brie').quality }.from(0).to(1)
       end
 
-      it "never is never assigned a quality above 50" do
+      it "is never assigned a quality above 50" do
         51.times { rose.update_quality }
         expect(rose.find('brie').quality).to eq(50)
       end
     end
 
     context "when item is 'Conjured Mana Cake'" do
-      xit "decreases Quality twice as fast" do
+      it "decreases Quality twice as fast" do
         expect{ rose.update_quality }.to change{ rose.find('mana').quality }.from(6).to(4)
       end
 
-      xit "decreases Quality four times as fast when past sell date" do
+      it "decreases Quality four times as fast when past sell date" do
         rose.find('mana').sell_in = 0
         expect{ rose.update_quality }.to change{ rose.find('mana').quality }.from(6).to(2)
       end
