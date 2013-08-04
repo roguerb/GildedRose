@@ -1,2 +1,7 @@
+require 'ostruct'
+require 'gilded_rose/qaulity'
+require 'gilded_rose/sell_in_never'
+require 'gilded_rose/sell_in_standard'
+require 'gilded_rose/item_mapper'
 require 'gilded_rose/rose'
 require 'gilded_rose/item'
