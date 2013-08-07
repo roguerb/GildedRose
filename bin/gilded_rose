@@ -1,0 +1,10 @@
+#!/usr/bin/env ruby
+
+root = File.expand_path('../../', __FILE__)
+Dir.glob(root + '/lib/**/').each { |dir| $:<< dir }
+
+require 'pry'
+require 'gilded_rose'
+
+@rose = GildedRose::Rose.new
+binding.pry
