@@ -35,25 +35,27 @@ Feature: Update Items
       | elixir    | 5       | 10      | 15  | 0     | -5    |
       | vest      | 20      | 8       | 10  | 8     | -2    |
 
-    Scenarios: Legendary Items
-      | item_name | start_q | start_s | num | end_q | end_s |
-      | sulfuras  | 80      | 0       | 1   | 80    | 0     |
-    # | sulfuras  | 20      | 20      | 1   | 80    | 0     | (bug)
+    # Not yet implemented
+    #
+    # Scenarios: Legendary Items
+    #   | item_name | start_q | start_s | num | end_q | end_s |
+    #   | sulfuras  | 80      | 0       | 1   | 80    | 0     |
+    #   | sulfuras  | 20      | 20      | 1   | 80    | 0     |
 
-    Scenarios: Conjured Items
-      | item_name | start_q | start_s | num | end_q | end_s |
-    # | conjured  | 20      | 5       | 3   | 14    | 2     | (bug)
-    # | conjured  | 20      | 2       | 3   | 12    | -1    | (bug)
+    # Scenarios: Conjured Items
+    #   | item_name | start_q | start_s | num | end_q | end_s |
+    #   | conjured  | 20      | 5       | 3   | 14    | 2     |
+    #   | conjured  | 20      | 2       | 3   | 12    | -1    |
 
-    Scenarios: Aged Brie
-      | item_name | start_q | start_s | num | end_q | end_s |
-      | brie      | 45      | 10      | 20  | 50    | -10   |
-      | brie      | 20      | 4       | 4   | 24    | 0     |
-      | brie      | 20      | 2       | 4   | 26    | -2    |
+    # Scenarios: Aged Brie
+    #   | item_name | start_q | start_s | num | end_q | end_s |
+    #   | brie      | 45      | 10      | 20  | 50    | -10   |
+    #   | brie      | 20      | 4       | 4   | 24    | 0     |
+    #   | brie      | 20      | 2       | 4   | 26    | -2    |
 
-    Scenarios: Backstage Passes
-      | item_name | start_q | start_s | num | end_q | end_s |
-      | concert   | 20      | 11      | 1   | 21    | 10    |
-      | concert   | 20      | 8       | 1   | 22    | 7     |
-      | concert   | 20      | 4       | 1   | 23    | 3     |
-      | concert   | 20      | 0       | 1   | 0     | -1    |
+    # Scenarios: Backstage Passes
+    #   | item_name | start_q | start_s | num | end_q | end_s |
+    #   | concert   | 20      | 11      | 1   | 21    | 10    |
+    #   | concert   | 20      | 8       | 1   | 22    | 7     |
+    #   | concert   | 20      | 4       | 1   | 23    | 3     |
+    #   | concert   | 20      | 0       | 1   | 0     | -1    |
