@@ -2,15 +2,13 @@ require 'spec_helper'
 
 module GildedRose
   describe Product do
+    let(:product) { Product.new(item) }
+    let(:item) { double(quality: 10, sell_in: 10) }
 
     describe "#update_item" do
       context "using default settings" do
-        let(:product) { Product.new(item) }
-        let(:item) { double(quality: 10, sell_in: 10) }
-
         before do
-          item.stub(:quality=)
-          item.stub(:sell_in=)
+          item.stub(:quality= => nil, :sell_in= => nil)
           product.update_item
         end
 
@@ -33,6 +31,39 @@ module GildedRose
             expect(item).to have_received(:quality=).with(0)
           end
         end
+      end
+    end
+
+    describe "#increase" do
+      it "returns an operation with the provided attribute" do
+        operation = product.increase(:quality)
+
+        expect(operation).to be_an(Operation)
+        expect(operation.length).to eql(2)
+        expect(operation[0]).to eql(:increase)
+        expect(operation[1]).to eql(:quality)
+      end
+    end
+
+    describe "#decrease" do
+      it "returns an operation with the provided attribute" do
+        operation = product.decrease(:sell_in)
+
+        expect(operation).to be_an(Operation)
+        expect(operation.length).to eql(2)
+        expect(operation[0]).to eql(:decrease)
+        expect(operation[1]).to eql(:sell_in)
+      end
+    end
+
+    describe "#set" do
+      it "returns an operation with the provided attribute" do
+        operation = product.set(:quality)
+
+        expect(operation).to be_an(Operation)
+        expect(operation.length).to eql(2)
+        expect(operation[0]).to eql(:set)
+        expect(operation[1]).to eql(:quality)
       end
     end
   end
