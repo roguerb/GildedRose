@@ -14,15 +14,15 @@ module GildedRose
     end
 
     def increase(attribute)
-      Operation.new([:increase, attribute])
+      Operation.new(:increase, attribute)
     end
 
     def decrease(attribute)
-      Operation.new([:decrease, attribute])
+      Operation.new(:decrease, attribute)
     end
 
     def set(attribute)
-      Operation.new([:set, attribute])
+      Operation.new(:set, attribute)
     end
   end
 end

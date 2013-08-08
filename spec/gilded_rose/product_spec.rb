@@ -38,10 +38,8 @@ module GildedRose
       it "returns an operation with the provided attribute" do
         operation = product.increase(:quality)
 
-        expect(operation).to be_an(Operation)
-        expect(operation.length).to eql(2)
-        expect(operation[0]).to eql(:increase)
-        expect(operation[1]).to eql(:quality)
+        expect(operation.type).to eql(:increase)
+        expect(operation.attribute).to eql(:quality)
       end
     end
 
@@ -49,10 +47,8 @@ module GildedRose
       it "returns an operation with the provided attribute" do
         operation = product.decrease(:sell_in)
 
-        expect(operation).to be_an(Operation)
-        expect(operation.length).to eql(2)
-        expect(operation[0]).to eql(:decrease)
-        expect(operation[1]).to eql(:sell_in)
+        expect(operation.type).to eql(:decrease)
+        expect(operation.attribute).to eql(:sell_in)
       end
     end
 
@@ -60,10 +56,8 @@ module GildedRose
       it "returns an operation with the provided attribute" do
         operation = product.set(:quality)
 
-        expect(operation).to be_an(Operation)
-        expect(operation.length).to eql(2)
-        expect(operation[0]).to eql(:set)
-        expect(operation[1]).to eql(:quality)
+        expect(operation.type).to eql(:set)
+        expect(operation.attribute).to eql(:quality)
       end
     end
   end
