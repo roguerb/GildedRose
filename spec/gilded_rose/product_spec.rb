@@ -5,6 +5,22 @@ module GildedRose
     let(:product) { Product.new(item) }
     let(:item) { double(quality: 10, sell_in: 10) }
 
+    describe "#initialize" do
+      it "sets item as an instance variable" do
+        expect(product.item).to eql(item)
+      end
+
+      it "builds a set of quality operations" do
+        expect(product.quality_ops.first).to be_a(Operation)
+        expect(product.quality_ops.count).to eql(2)
+      end
+
+      it "builds a set of sell_in operations" do
+        expect(product.sell_in_ops.first).to be_a(Operation)
+        expect(product.sell_in_ops.count).to eql(1)
+      end
+    end
+
     describe "#update_item" do
       context "using default settings" do
         before do
