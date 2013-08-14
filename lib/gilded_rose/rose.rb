@@ -1,6 +1,5 @@
 module GildedRose
   class Rose
-
     @items = []
 
     def initialize
@@ -45,7 +44,6 @@ module GildedRose
         end
       else
         decrease_quality(item)
-
         if item.sell_in < 0
           decrease_quality(item)
         end
@@ -57,11 +55,21 @@ module GildedRose
     end
 
     def increase_quality(item)
-      item.quality += 1 if item.quality < 50
+      adjust_quality(item, 1)
     end
 
     def decrease_quality(item)
-      item.quality -= 1 if item.quality > 0
+      adjust_quality(item, -1)
+    end
+
+    def adjust_quality(item, delta)
+      item.quality = clamp(item.quality + delta, 0..50)
+    end
+
+    def clamp(value, range)
+      return range.first if value < range.first
+      return range.last if value > range.last
+      value
     end
 
     def find(name)
