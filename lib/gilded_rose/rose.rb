@@ -14,6 +14,8 @@ module GildedRose
       @items.each { |item| update_item(item) }
     end
 
+    private
+
     def update_item(item)
       return if item.name == "Sulfuras, Hand of Ragnaros"
 
@@ -25,12 +27,16 @@ module GildedRose
       item.sell_in -= 1
     end
 
+    def adjust_quality(item, delta)
+      item.quality = clamp(item.quality + delta, 0..50)
+    end
+
     def quality_adjustment(item)
       case item.name
       when "Aged Brie"
         aged_brie_adjustment
       when /Conjured/
-        standard_adjustment(item) * 2
+        conjured_adjustment(item)
       when /Backstage passes/
         backstage_passes_adjustment(item)
       else
@@ -42,6 +48,10 @@ module GildedRose
       1
     end
 
+    def conjured_adjustment(item)
+      standard_adjustment(item) * 2
+    end
+
     def backstage_passes_adjustment(item)
       return -item.quality if item.sell_in < 0
       return 3 if item.sell_in < 5
@@ -51,10 +61,6 @@ module GildedRose
 
     def standard_adjustment(item)
       item.sell_in < 0 ? -2 : -1
-    end
-
-    def adjust_quality(item, delta)
-      item.quality = clamp(item.quality + delta, 0..50)
     end
 
     def clamp(value, range)
