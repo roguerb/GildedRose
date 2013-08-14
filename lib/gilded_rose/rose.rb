@@ -31,6 +31,10 @@ module GildedRose
       end
 
       if item.name == "Backstage passes to a TAFKAL80ETC concert"
+        if item.sell_in < 0
+          item.quality = 0
+          return
+        end
         increase_quality(item)
         if (item.sell_in < 10)
           increase_quality(item)
@@ -38,16 +42,13 @@ module GildedRose
         if (item.sell_in < 5)
           increase_quality(item)
         end
-      else
-        decrease_quality(item)
+        return
       end
 
-      if (item.sell_in < 0)
-        if item.name == "Backstage passes to a TAFKAL80ETC concert"
-          item.quality = 0
-        else
-          decrease_quality(item)
-        end
+      decrease_quality(item)
+
+      if item.sell_in < 0
+        decrease_quality(item)
       end
     end
 
