@@ -24,30 +24,26 @@ module GildedRose
     end
 
     def update_item_quality(item)
+      delta = 0
+
       case item.name
       when "Aged Brie"
-        increase_quality(item)
-        if item.sell_in < 0
-          increase_quality(item)
-        end
+        delta = item.sell_in < 0 ? 2 : 1
       when "Backstage passes to a TAFKAL80ETC concert"
         if item.sell_in < 0
-          item.quality = 0
+          delta = -item.quality
         else
-          increase_quality(item)
-          if item.sell_in < 10
-            increase_quality(item)
-            if item.sell_in < 5
-              increase_quality(item)
-            end
+          delta = case
+          when item.sell_in < 5 then 3
+          when item.sell_in < 10 then 2
+          else
+            1
           end
         end
       else
-        decrease_quality(item)
-        if item.sell_in < 0
-          decrease_quality(item)
-        end
+        delta = item.sell_in < 0 ? -2 : -1
       end
+      adjust_quality(item, delta)
     end
 
     def age_item(item)
