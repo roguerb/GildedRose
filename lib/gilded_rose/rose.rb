@@ -1,7 +1,5 @@
 module GildedRose
   class Rose
-    @items = []
-
     def initialize
       @items = []
       @items << Item.new("+5 Dexterity Vest", 10, 20)
@@ -63,10 +61,6 @@ module GildedRose
       return range.first if value < range.first
       return range.last if value > range.last
       value
-    end
-
-    def find(name)
-      @items.detect { |item| item.name.downcase.include?(name) }
     end
   end
 end

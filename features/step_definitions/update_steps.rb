@@ -2,9 +2,9 @@ Transform /^(-?\d+)$/ do |number|
   number.to_i
 end
 
-Given(/^the item is ([^"]*)$/) do |item|
+Given(/^the item is ([^"]*)$/) do |name|
   @rose = GildedRose::Rose.new
-  @item = @rose.find(item)
+  @item = @rose.instance_variable_get(:@items).detect { |item| item.name.downcase.include?(name) }
 end
 
 Given(/^it's quality is (.*?)$/) do |quality|
