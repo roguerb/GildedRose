@@ -20,8 +20,11 @@ module GildedRose
     def update_item(item)
       return if item.name == "Sulfuras, Hand of Ragnaros"
 
-      item.sell_in -= 1
+      age_item(item)
+      update_item_quality(item)
+    end
 
+    def update_item_quality(item)
       case item.name
       when "Aged Brie"
         increase_quality(item)
@@ -47,6 +50,10 @@ module GildedRose
           decrease_quality(item)
         end
       end
+    end
+
+    def age_item(item)
+      item.sell_in -= 1
     end
 
     def increase_quality(item)
