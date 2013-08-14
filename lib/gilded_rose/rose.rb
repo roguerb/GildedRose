@@ -25,19 +25,13 @@ module GildedRose
           end
         end
       else
-        if (item.quality < 50)
-          item.quality = item.quality + 1
-          if (item.name == "Backstage passes to a TAFKAL80ETC concert")
-            if (item.sell_in < 11)
-              if (item.quality < 50)
-                item.quality = item.quality + 1
-              end
-            end
-            if (item.sell_in < 6)
-              if (item.quality < 50)
-                item.quality = item.quality + 1
-              end
-            end
+        increase_quality(item)
+        if (item.name == "Backstage passes to a TAFKAL80ETC concert")
+          if (item.sell_in < 11)
+            increase_quality(item)
+          end
+          if (item.sell_in < 6)
+            increase_quality(item)
           end
         end
       end
@@ -56,10 +50,14 @@ module GildedRose
             item.quality = item.quality - item.quality
           end
         else
-          if (item.quality < 50)
-            item.quality = item.quality + 1
-          end
+          increase_quality(item)
         end
+      end
+    end
+
+    def increase_quality(item)
+      if (item.quality < 50)
+        item.quality = item.quality + 1
       end
     end
 
