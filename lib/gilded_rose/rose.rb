@@ -21,9 +21,7 @@ module GildedRose
       return if item.name == "Sulfuras, Hand of Ragnaros"
 
       if (item.name != "Aged Brie" && item.name != "Backstage passes to a TAFKAL80ETC concert")
-        if (item.quality > 0)
-          item.quality = item.quality - 1
-        end
+        decrease_quality(item)
       else
         increase_quality(item)
         if (item.name == "Backstage passes to a TAFKAL80ETC concert")
@@ -39,9 +37,7 @@ module GildedRose
       if (item.sell_in < 0)
         if (item.name != "Aged Brie")
           if (item.name != "Backstage passes to a TAFKAL80ETC concert")
-            if (item.quality > 0)
-              item.quality = item.quality - 1
-            end
+            decrease_quality(item)
           else
             item.quality = 0
           end
@@ -54,6 +50,12 @@ module GildedRose
     def increase_quality(item)
       if (item.quality < 50)
         item.quality = item.quality + 1
+      end
+    end
+
+    def decrease_quality(item)
+      if (item.quality > 0)
+        item.quality = item.quality - 1
       end
     end
 
