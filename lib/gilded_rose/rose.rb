@@ -47,7 +47,7 @@ module GildedRose
               end
             end
           else
-            item.quality = item.quality - item.quality
+            item.quality = 0
           end
         else
           increase_quality(item)
