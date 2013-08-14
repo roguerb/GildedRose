@@ -49,7 +49,7 @@ Feature: Update Items
       | item_name | start_q | start_s | num | end_q | end_s |
       | brie      | 45      | 10      | 20  | 50    | -10   |
       | brie      | 20      | 4       | 4   | 24    | 0     |
-      | brie      | 20      | 2       | 4   | 26    | -2    |
+      | brie      | 20      | 2       | 4   | 24    | -2    |
 
     Scenarios: Backstage Passes
       | item_name | start_q | start_s | num | end_q | end_s |

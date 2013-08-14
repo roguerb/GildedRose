@@ -30,7 +30,7 @@ module GildedRose
     def quality_adjustment(item)
       case item.name
       when "Aged Brie"
-        item.sell_in < 0 ? 2 : 1
+        1
       when /Conjured/
         item.sell_in < 0 ? -4 : -2
       when /Backstage passes/
