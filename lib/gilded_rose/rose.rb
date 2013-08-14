@@ -20,42 +20,25 @@ module GildedRose
       return if item.name == "Sulfuras, Hand of Ragnaros"
 
       age_item(item)
-      update_item_quality(item)
-    end
-
-    def update_item_quality(item)
-      delta = 0
-
-      case item.name
-      when "Aged Brie"
-        delta = item.sell_in < 0 ? 2 : 1
-      when "Backstage passes to a TAFKAL80ETC concert"
-        if item.sell_in < 0
-          delta = -item.quality
-        else
-          delta = case
-          when item.sell_in < 5 then 3
-          when item.sell_in < 10 then 2
-          else
-            1
-          end
-        end
-      else
-        delta = item.sell_in < 0 ? -2 : -1
-      end
-      adjust_quality(item, delta)
+      adjust_quality(item, quality_adjustment(item))
     end
 
     def age_item(item)
       item.sell_in -= 1
     end
 
-    def increase_quality(item)
-      adjust_quality(item, 1)
-    end
-
-    def decrease_quality(item)
-      adjust_quality(item, -1)
+    def quality_adjustment(item)
+      case item.name
+      when "Aged Brie"
+        item.sell_in < 0 ? 2 : 1
+      when "Backstage passes to a TAFKAL80ETC concert"
+        return -item.quality if item.sell_in < 0
+        return 3 if item.sell_in < 5
+        return 2 if item.sell_in < 10
+        return 1
+      else
+        item.sell_in < 0 ? -2 : -1
+      end
     end
 
     def adjust_quality(item, delta)
