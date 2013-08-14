@@ -20,17 +20,15 @@ module GildedRose
     def update_item(item)
       return if item.name == "Sulfuras, Hand of Ragnaros"
 
-      item.sell_in = item.sell_in - 1;
+      item.sell_in -= 1
 
-      if item.name == "Aged Brie"
+      case item.name
+      when "Aged Brie"
         increase_quality(item)
         if item.sell_in < 0
           increase_quality(item)
         end
-        return
-      end
-
-      if item.name == "Backstage passes to a TAFKAL80ETC concert"
+      when "Backstage passes to a TAFKAL80ETC concert"
         if item.sell_in < 0
           item.quality = 0
         else
@@ -42,26 +40,21 @@ module GildedRose
             end
           end
         end
-        return
-      end
-
-      decrease_quality(item)
-
-      if item.sell_in < 0
+      else
         decrease_quality(item)
+
+        if item.sell_in < 0
+          decrease_quality(item)
+        end
       end
     end
 
     def increase_quality(item)
-      if (item.quality < 50)
-        item.quality = item.quality + 1
-      end
+      item.quality += 1 if item.quality < 50
     end
 
     def decrease_quality(item)
-      if (item.quality > 0)
-        item.quality = item.quality - 1
-      end
+      item.quality -= 1 if item.quality > 0
     end
 
     def find(name)
