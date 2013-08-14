@@ -31,14 +31,20 @@ module GildedRose
       case item.name
       when "Aged Brie"
         item.sell_in < 0 ? 2 : 1
-      when "Backstage passes to a TAFKAL80ETC concert"
-        return -item.quality if item.sell_in < 0
-        return 3 if item.sell_in < 5
-        return 2 if item.sell_in < 10
-        return 1
+      when /Conjured/
+        item.sell_in < 0 ? -4 : -2
+      when /Backstage passes/
+        backstage_passes_adjustment(item)
       else
         item.sell_in < 0 ? -2 : -1
       end
+    end
+
+    def backstage_passes_adjustment(item)
+      return -item.quality if item.sell_in < 0
+      return 3 if item.sell_in < 5
+      return 2 if item.sell_in < 10
+      return 1
     end
 
     def adjust_quality(item, delta)

@@ -42,8 +42,8 @@ Feature: Update Items
 
     Scenarios: Conjured Items
       | item_name | start_q | start_s | num | end_q | end_s |
-    # | conjured  | 20      | 5       | 3   | 14    | 2     | (unimplemented)
-    # | conjured  | 20      | 2       | 3   | 12    | -1    | (unimplemented)
+      | conjured  | 20      | 5       | 3   | 14    | 2     |
+      | conjured  | 20      | 2       | 3   | 12    | -1    |
 
     Scenarios: Aged Brie
       | item_name | start_q | start_s | num | end_q | end_s |
